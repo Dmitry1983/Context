@@ -39,9 +39,6 @@ export function IndexComponent() {
         onPress={() => {
           dispatch({
             type: 'setAdd',
-            payload: {
-              //
-            },
           });
         }}
       />

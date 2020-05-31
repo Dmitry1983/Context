@@ -14,7 +14,7 @@ export const testReducer = (state, action) => {
     case 'setTest':
       return {
         ...state,
-        ...action.test,
+        ...action.payload,
       };
     case 'setAdd':
       return {
