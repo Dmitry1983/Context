@@ -4,5 +4,6 @@
         "source.fixAll.eslint": true
         
     },
+    "eslint no-unused-vars: ["error", { "varsIgnorePattern": "[iI]gnored" }]"
 }
   

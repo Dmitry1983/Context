@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Button, Text, StyleSheet} from 'react-native';
 import {ContextApp} from './reducer';
+import {ButtonAdd} from './ButtonAdd';
 
 function Separator() {
   return <View style={styles.separator} />;
@@ -56,6 +57,7 @@ export function IndexComponent() {
         }}
       />
       <Text style={text}>{state.newVar}</Text>
+      <ButtonAdd />
     </View>
   );
 }
