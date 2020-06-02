@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {View, Button, Text, StyleSheet, TextInput} from 'react-native';
 import {ContextApp} from './reducer';
 import {ButtonAdd} from './ButtonAdd';
