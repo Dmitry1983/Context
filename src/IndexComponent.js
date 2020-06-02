@@ -1,10 +1,10 @@
-import React, {useContext, useCallback} from 'react'
-import {View, Button, Text, StyleSheet, TextInput} from 'react-native'
-import {ContextApp} from './reducer'
-import {ButtonAdd} from './ButtonAdd'
+import React, {useContext, useEffect} from 'react';
+import {View, Button, Text, StyleSheet, TextInput} from 'react-native';
+import {ContextApp} from './reducer';
+import {ButtonAdd} from './ButtonAdd';
 
 function Separator() {
-  return <View style={styles.separator} />
+  return <View style={styles.separator} />;
 }
 
 export function IndexComponent() {
@@ -13,8 +13,8 @@ export function IndexComponent() {
   const {state, dispatch} = useContext(ContextApp);
   const {test, press, newVar} = state;
   const {text, button, view} = styles;
-  const inputTextToContext = value => {
 
+  const inputTextToContext = value => {
     dispatch({
       type: 'AddSettings',
       payload: {
@@ -22,11 +22,12 @@ export function IndexComponent() {
       },
     });
   };
-  const addCounter = useCallback(() => {
+
+  const addCounter = () => {
     dispatch({
       type: 'setAdd',
     });
-  });
+  };
 
   return (
     // Используя dispatch мы попадаем в reducer.js в метод testReducer
