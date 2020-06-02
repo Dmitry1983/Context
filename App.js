@@ -1,20 +1,27 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useCallback, useEffect} from 'react';
+import { Button } from 'react-native'
 import {ContextApp, initialState, testReducer} from './src/reducer';
-import {IndexComponent} from './src/IndexComponent';
-import {Timer} from './src/Timer';
-import {ButtonAdd} from './src/ButtonAdd';
+import {IndexComponent} from './src/IndexComponent'
 
-const App = () => {
+const App = (  ) => {
   // Инициализируем reducer и получаем state + dispatch для записи
   const [state, dispatch] = useReducer(testReducer, initialState);
 
-  // React.useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     Timer();
-  //   }, 3000);
+  const addCounter = useCallback(() => {
+    dispatch({
+      type: 'setAdd',
+    });
+  });
 
-  //   return () => clearInterval(intervalId);
-  // }, []);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      addCounter();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [addCounter]);
+
+  let content = <IndexComponent />
 
   return (
     // Для того, чтобы мы могли использовать reducer в компонентах
@@ -22,8 +29,8 @@ const App = () => {
     // в компоненты ниже по иерархии
 
     <ContextApp.Provider value={{dispatch, state}}>
-      <IndexComponent />
-      <ButtonAdd />
+      {content }
+
     </ContextApp.Provider>
   );
 };

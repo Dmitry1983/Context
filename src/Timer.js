@@ -7,13 +7,14 @@ export function Timer() {
   // Компонент IndexComponent должен быть обязательно обернут в ContextApp.Provider
   const {state, dispatch} = useContext(ContextApp);
 
-  const createAccount = () => {
+  const plusOne = () => {
     try {
       dispatch({type: 'setAdd'});
     } catch (e) {
       // handle error here
+      console.log(e);
     }
   };
 
-  return createAccount();
+  return plusOne();
 }

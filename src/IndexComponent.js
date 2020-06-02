@@ -1,17 +1,32 @@
-import React, {useContext} from 'react';
-import {View, Button, Text, StyleSheet} from 'react-native';
-import {ContextApp} from './reducer';
-import {ButtonAdd} from './ButtonAdd';
+import React, {useContext, useCallback} from 'react'
+import {View, Button, Text, StyleSheet, TextInput} from 'react-native'
+import {ContextApp} from './reducer'
+import {ButtonAdd} from './ButtonAdd'
 
 function Separator() {
-  return <View style={styles.separator} />;
+  return <View style={styles.separator} />
 }
 
 export function IndexComponent() {
   // Используем функцию useContext для получения контекста ContextApp
   // Компонент IndexComponent должен быть обязательно обернут в ContextApp.Provider
   const {state, dispatch} = useContext(ContextApp);
+  const {test, press, newVar} = state;
   const {text, button, view} = styles;
+  const inputTextToContext = value => {
+
+    dispatch({
+      type: 'AddSettings',
+      payload: {
+        newVar: value,
+      },
+    });
+  };
+  const addCounter = useCallback(() => {
+    dispatch({
+      type: 'setAdd',
+    });
+  });
 
   return (
     // Используя dispatch мы попадаем в reducer.js в метод testReducer
@@ -32,31 +47,24 @@ export function IndexComponent() {
           });
         }}
       />
-      <Text style={text}>{state.test}</Text>
+      <Text style={text}>{test}</Text>
       <View style={view} />
+      <Button title="Add press" style={button} onPress={() => addCounter()} />
+      <Text style={text}>{JSON.stringify(press)}</Text>
+      <Separator />
+      <TextInput
+        placeholder="Enter text"
+        onChangeText={value => inputTextToContext(value)}
+      />
       <Button
-        title="Add press"
+        title="Submit text"
         style={button}
         onPress={() => {
-          dispatch({
-            type: 'setAdd',
-          });
+          inputTextToContext('press btn');
         }}
       />
-      <Text style={text}>{JSON.stringify(state.press)}</Text>
-      <Button
-        title="Press Me"
-        style={button}
-        onPress={() => {
-          dispatch({
-            type: 'AddSettings',
-            payload: {
-              newVar: 123,
-            },
-          });
-        }}
-      />
-      <Text style={text}>{state.newVar}</Text>
+      <Separator />
+      <Text style={text}>{newVar}</Text>
       <ButtonAdd />
     </View>
   );
@@ -68,11 +76,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   view: {
-    height: 75,
+    height: 50,
   },
-  button: {},
   separator: {
-    marginVertical: 8,
+    marginVertical: 16,
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
