@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
-import {View, Button, Text, StyleSheet} from 'react-native';
-import {ContextApp} from './reducer';
+import React, { useContext } from 'react';
+import { View, Button, Text, StyleSheet } from 'react-native';
+import { ContextApp } from './reducer';
 
 function Separator() {
   return <View style={styles.separator} />;
@@ -9,8 +9,8 @@ function Separator() {
 export function IndexComponent() {
   // Используем функцию useContext для получения контекста ContextApp
   // Компонент IndexComponent должен быть обязательно обернут в ContextApp.Provider
-  const {state, dispatch} = useContext(ContextApp);
-  const {text, button, view} = styles;
+  const { state, dispatch } = useContext(ContextApp);
+  const { text, button, view } = styles;
 
   return (
     // Используя dispatch мы попадаем в reducer.js в метод testReducer
